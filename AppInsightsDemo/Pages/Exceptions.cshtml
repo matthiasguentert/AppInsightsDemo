@@ -1,0 +1,43 @@
+﻿@page
+@model AppInsightsDemo.Pages.ExceptionsModel
+@{
+    ViewData["Title"] = "Exceptions";
+}
+<h1>@ViewData["Title"]</h1>
+
+@section scripts
+{
+    <script>
+        $(document).click(e => {
+            var id = e.target.id;
+            console.log(id);
+
+            switch (id) {
+                case "throwOnFrontend":
+                    throw new Error('Exception thrown on frontend')
+                    break;
+
+                case "throwOnBackend":
+                    $.ajax({
+                        url: '?handler=ThrowOnBackend'
+                    }); break;
+
+                case "throwOnServiceApi":
+                    $.ajax({
+                        url: '?handler=ThrowOnServiceApi'
+                    }); break;
+            }
+        });
+    </script>
+}
+
+<div class="btn-group-vertical" role="group">
+    <button class="btn btn-primary mb-1" id="throwOnFrontend">Throw exception on frontend</button>
+    <button class="btn btn-primary mb-1" id="throwOnBackend">Throw exception on backend</button>
+    <button class="btn btn-primary mb-1" id="throwOnServiceApi">Throw exception on service API</button>
+</div>
+
+@*<form method="post" class="mt-1">
+        <button class="btn btn-primary">Throw exception on service API</button>
+        <input type="hidden" name="id" value="throwOnServiceApi" />
+    </form>*@

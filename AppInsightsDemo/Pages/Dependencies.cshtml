@@ -1,0 +1,44 @@
+﻿@page
+@model AppInsightsDemo.Pages.DependenciesModel
+@{
+    ViewData["Title"] = "Dependencies";
+}
+<h1>@ViewData["Title"]</h1>
+
+@section scripts
+{
+    <script>
+        $('#getRandomDrink').on('click', () => {
+            $.ajax({
+                url: '?handler=RandomDrink'
+            }).done((r) => {
+                document.getElementById("response").innerHTML = r;
+            });
+        });
+
+        $('#createBlob').on('click', () => {
+            $.ajax({
+                url: '?handler=CreateBlob'
+            }).done((r) => {
+                document.getElementById("response").innerHTML = r;
+            });
+        });
+
+        $('#getForecast').on('click', () => {
+            $.ajax({
+                url: '?handler=Forecast'
+            }).done((r) => {
+                document.getElementById("response").innerHTML = r;
+            });
+        });
+    </script>
+}
+
+<div class="btn-group-vertical" role="group">
+    <button class="btn btn-primary mb-1" id="getRandomDrink">Get Random Drink</button>
+    <button class="btn btn-primary mb-1" id="createBlob">Create Blob</button>
+    <button class="btn btn-primary mb-1" id="getForecast">Get Weather Forecast</button>
+</div>
+
+<h1>Response</h1>
+<div id="response"></div>

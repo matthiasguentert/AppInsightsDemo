@@ -1,0 +1,36 @@
+﻿@page
+@model AppInsightsDemo.Pages.FunnelModel
+@Html.AntiForgeryToken()
+@{
+   ViewData["Title"] = "Funnel";
+}
+<h1>@ViewData["Title"]</h1>
+
+@section scripts
+{
+    <script>
+        $(document).on('click', (e) => {
+            $.ajax({
+                url: '?handler=FunnelTest',
+                method: 'POST',
+                data: {
+                    id: e.target.id
+                },
+                headers: {
+                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                }
+            })
+        });
+    </script>
+}
+
+<div class="btn-group-vertical" role="group">
+    <button class="btn btn-primary mb-1" id="1-add-item-to-cart">1. Add item to cart</button>
+    <button class="btn btn-primary mb-1" id="2-checkout">2. Go to checkout</button>
+    <button class="btn btn-primary mb-1" id="3-create-user-account">3. Create user account</button>
+    <button class="btn btn-primary mb-1" id="4-add-payment-shipping-details">4. Add payment & shipping details</button>
+    <button class="btn btn-primary mb-1" id="5-subscribe-nasty-newsletter">5. Subscribe to nasty newsletter</button>
+    <button class="btn btn-primary mb-1" id="6-complete-order">6. Complete order</button>
+</div>
+
+

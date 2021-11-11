@@ -1,0 +1,44 @@
+﻿@page
+@model AppInsightsDemo.Pages.TrackModel
+@{
+    ViewData["Title"] = "Track";
+}
+<h1>@ViewData["Title"]</h1>
+
+@section scripts
+{
+    <script>
+        $('#trackTrace').on('click', () => {
+            $.ajax({
+                url: '?handler=Trace'
+            }).done((r) => {
+                document.getElementById("response").innerHTML = r;
+            });
+        });
+
+        $('#trackException').on('click', () => {
+            $.ajax({
+                url: '?handler=Exception'
+            }).done((r) => {
+                document.getElementById("response").innerHTML = r;
+            });
+        });
+
+        $('#trackEvent').on('click', () => {
+            $.ajax({
+                url: '?handler=Event'
+            }).done((r) => {
+                document.getElementById("response").innerHTML = r;
+            });
+        });
+    </script>
+}
+
+<div class="btn-group-vertical" role="group">
+    <button class="btn btn-primary mb-1" id="trackTrace">TrackTrace()</button>
+    <button class="btn btn-primary mb-1" id="trackException">TrackException()</button>
+    <button class="btn btn-primary" id="trackEvent">TrackEvent()</button>
+</div>
+
+<h1>Response</h1>
+<div id="response"></div>
